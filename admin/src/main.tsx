@@ -1,38 +1,40 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom/client";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import { TanstackRouterProvider } from "./components/partials/TanstackRouterProvider";
-import "./index.css";
-import { AuthProvider } from "./context/AuthContext";
+import { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 1000 * 60 * 15, // 15 minutes
-    },
-  },
-});
+// Import the generated route tree
+import { routeTree } from './routeTree.gen'
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TanstackRouterProvider />
-      </AuthProvider>
-    </QueryClientProvider>
-  );
+import './styles.css'
+import reportWebVitals from './reportWebVitals.ts'
+
+// Create a new router instance
+const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+  defaultStructuralSharing: true,
+})
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
 }
 
-const rootElement = document.getElementById("root")!;
+// Render the app
+const rootElement = document.getElementById('app')!
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
+  const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <App />
+      <RouterProvider router={router} />
     </StrictMode>,
-  );
+  )
 }
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()

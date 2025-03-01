@@ -8,727 +8,101 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as UnprotectedImport } from './routes/_unprotected'
-import { Route as ProtectedImport } from './routes/_protected'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as UnprotectedIndexImport } from './routes/_unprotected/index'
-import { Route as UnprotectedTermsAndConditionImport } from './routes/_unprotected/terms-and-condition'
-import { Route as UnprotectedPrivacyPolicyImport } from './routes/_unprotected/privacy-policy'
-import { Route as ProtectedNotificationsImport } from './routes/_protected/notifications'
-import { Route as ProtectedMessagesImport } from './routes/_protected/messages'
-import { Route as ProtectedDashboardImport } from './routes/_protected/dashboard'
-import { Route as ProtectedCustomersImport } from './routes/_protected/customers'
-import { Route as AuthVerifyEmailImport } from './routes/_auth/verify-email'
-import { Route as AuthRegisterImport } from './routes/_auth/register'
-import { Route as AuthLoginImport } from './routes/_auth/login'
-import { Route as AuthForgotPasswordImport } from './routes/_auth/forgot-password'
-import { Route as AuthConfirmPasswordImport } from './routes/_auth/confirm-password'
-import { Route as ProtectedCoursesIndexImport } from './routes/_protected/courses/index'
-import { Route as ProtectedAnalyticsIndexImport } from './routes/_protected/analytics/index'
-import { Route as ProtectedSettingsLayoutImport } from './routes/_protected/settings/_layout'
-import { Route as ProtectedCoursesAddImport } from './routes/_protected/courses/add'
-import { Route as ProtectedCoursesSlugImport } from './routes/_protected/courses/$slug'
-import { Route as ProtectedAnalyticsSlugImport } from './routes/_protected/analytics/$slug'
-import { Route as ProtectedSettingsLayoutIndexImport } from './routes/_protected/settings/_layout/index'
-import { Route as ProtectedCoursesEditIndexImport } from './routes/_protected/courses/edit/index'
-import { Route as ProtectedSettingsLayoutNotificationsImport } from './routes/_protected/settings/_layout/notifications'
-import { Route as ProtectedSettingsLayoutDisplayImport } from './routes/_protected/settings/_layout/display'
-import { Route as ProtectedSettingsLayoutAppearanceImport } from './routes/_protected/settings/_layout/appearance'
-import { Route as ProtectedSettingsLayoutAccountImport } from './routes/_protected/settings/_layout/account'
-import { Route as ProtectedCoursesEditSlugImport } from './routes/_protected/courses/edit/$slug'
-
-// Create Virtual Routes
-
-const ProtectedSettingsImport = createFileRoute('/_protected/settings')()
+import { Route as IndexImport } from './routes/index'
+import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
+import { Route as DemoStoreImport } from './routes/demo.store'
 
 // Create/Update Routes
 
-const UnprotectedRoute = UnprotectedImport.update({
-  id: '/_unprotected',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProtectedRoute = ProtectedImport.update({
-  id: '/_protected',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AuthRoute = AuthImport.update({
-  id: '/_auth',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProtectedSettingsRoute = ProtectedSettingsImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const UnprotectedIndexRoute = UnprotectedIndexImport.update({
+const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => UnprotectedRoute,
+  getParentRoute: () => rootRoute,
 } as any)
 
-const UnprotectedTermsAndConditionRoute =
-  UnprotectedTermsAndConditionImport.update({
-    id: '/terms-and-condition',
-    path: '/terms-and-condition',
-    getParentRoute: () => UnprotectedRoute,
-  } as any)
-
-const UnprotectedPrivacyPolicyRoute = UnprotectedPrivacyPolicyImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => UnprotectedRoute,
+const DemoTanstackQueryRoute = DemoTanstackQueryImport.update({
+  id: '/demo/tanstack-query',
+  path: '/demo/tanstack-query',
+  getParentRoute: () => rootRoute,
 } as any)
 
-const ProtectedNotificationsRoute = ProtectedNotificationsImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedMessagesRoute = ProtectedMessagesImport.update({
-  id: '/messages',
-  path: '/messages',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedDashboardRoute = ProtectedDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedCustomersRoute = ProtectedCustomersImport.update({
-  id: '/customers',
-  path: '/customers',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const AuthVerifyEmailRoute = AuthVerifyEmailImport.update({
-  id: '/verify-email',
-  path: '/verify-email',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AuthRegisterRoute = AuthRegisterImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AuthLoginRoute = AuthLoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AuthConfirmPasswordRoute = AuthConfirmPasswordImport.update({
-  id: '/confirm-password',
-  path: '/confirm-password',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const ProtectedCoursesIndexRoute = ProtectedCoursesIndexImport.update({
-  id: '/courses/',
-  path: '/courses/',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedAnalyticsIndexRoute = ProtectedAnalyticsIndexImport.update({
-  id: '/analytics/',
-  path: '/analytics/',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedSettingsLayoutRoute = ProtectedSettingsLayoutImport.update({
-  id: '/_layout',
-  getParentRoute: () => ProtectedSettingsRoute,
-} as any)
-
-const ProtectedCoursesAddRoute = ProtectedCoursesAddImport.update({
-  id: '/courses/add',
-  path: '/courses/add',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedCoursesSlugRoute = ProtectedCoursesSlugImport.update({
-  id: '/courses/$slug',
-  path: '/courses/$slug',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedAnalyticsSlugRoute = ProtectedAnalyticsSlugImport.update({
-  id: '/analytics/$slug',
-  path: '/analytics/$slug',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedSettingsLayoutIndexRoute =
-  ProtectedSettingsLayoutIndexImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => ProtectedSettingsLayoutRoute,
-  } as any)
-
-const ProtectedCoursesEditIndexRoute = ProtectedCoursesEditIndexImport.update({
-  id: '/courses/edit/',
-  path: '/courses/edit/',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-
-const ProtectedSettingsLayoutNotificationsRoute =
-  ProtectedSettingsLayoutNotificationsImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => ProtectedSettingsLayoutRoute,
-  } as any)
-
-const ProtectedSettingsLayoutDisplayRoute =
-  ProtectedSettingsLayoutDisplayImport.update({
-    id: '/display',
-    path: '/display',
-    getParentRoute: () => ProtectedSettingsLayoutRoute,
-  } as any)
-
-const ProtectedSettingsLayoutAppearanceRoute =
-  ProtectedSettingsLayoutAppearanceImport.update({
-    id: '/appearance',
-    path: '/appearance',
-    getParentRoute: () => ProtectedSettingsLayoutRoute,
-  } as any)
-
-const ProtectedSettingsLayoutAccountRoute =
-  ProtectedSettingsLayoutAccountImport.update({
-    id: '/account',
-    path: '/account',
-    getParentRoute: () => ProtectedSettingsLayoutRoute,
-  } as any)
-
-const ProtectedCoursesEditSlugRoute = ProtectedCoursesEditSlugImport.update({
-  id: '/courses/edit/$slug',
-  path: '/courses/edit/$slug',
-  getParentRoute: () => ProtectedRoute,
+const DemoStoreRoute = DemoStoreImport.update({
+  id: '/demo/store',
+  path: '/demo/store',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/_protected': {
-      id: '/_protected'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof ProtectedImport
-      parentRoute: typeof rootRoute
-    }
-    '/_unprotected': {
-      id: '/_unprotected'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof UnprotectedImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/confirm-password': {
-      id: '/_auth/confirm-password'
-      path: '/confirm-password'
-      fullPath: '/confirm-password'
-      preLoaderRoute: typeof AuthConfirmPasswordImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/forgot-password': {
-      id: '/_auth/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof AuthForgotPasswordImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/login': {
-      id: '/_auth/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/register': {
-      id: '/_auth/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof AuthRegisterImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/verify-email': {
-      id: '/_auth/verify-email'
-      path: '/verify-email'
-      fullPath: '/verify-email'
-      preLoaderRoute: typeof AuthVerifyEmailImport
-      parentRoute: typeof AuthImport
-    }
-    '/_protected/customers': {
-      id: '/_protected/customers'
-      path: '/customers'
-      fullPath: '/customers'
-      preLoaderRoute: typeof ProtectedCustomersImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/dashboard': {
-      id: '/_protected/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof ProtectedDashboardImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/messages': {
-      id: '/_protected/messages'
-      path: '/messages'
-      fullPath: '/messages'
-      preLoaderRoute: typeof ProtectedMessagesImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/notifications': {
-      id: '/_protected/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof ProtectedNotificationsImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_unprotected/privacy-policy': {
-      id: '/_unprotected/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof UnprotectedPrivacyPolicyImport
-      parentRoute: typeof UnprotectedImport
-    }
-    '/_unprotected/terms-and-condition': {
-      id: '/_unprotected/terms-and-condition'
-      path: '/terms-and-condition'
-      fullPath: '/terms-and-condition'
-      preLoaderRoute: typeof UnprotectedTermsAndConditionImport
-      parentRoute: typeof UnprotectedImport
-    }
-    '/_unprotected/': {
-      id: '/_unprotected/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof UnprotectedIndexImport
-      parentRoute: typeof UnprotectedImport
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
     }
-    '/_protected/analytics/$slug': {
-      id: '/_protected/analytics/$slug'
-      path: '/analytics/$slug'
-      fullPath: '/analytics/$slug'
-      preLoaderRoute: typeof ProtectedAnalyticsSlugImport
-      parentRoute: typeof ProtectedImport
+    '/demo/store': {
+      id: '/demo/store'
+      path: '/demo/store'
+      fullPath: '/demo/store'
+      preLoaderRoute: typeof DemoStoreImport
+      parentRoute: typeof rootRoute
     }
-    '/_protected/courses/$slug': {
-      id: '/_protected/courses/$slug'
-      path: '/courses/$slug'
-      fullPath: '/courses/$slug'
-      preLoaderRoute: typeof ProtectedCoursesSlugImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/courses/add': {
-      id: '/_protected/courses/add'
-      path: '/courses/add'
-      fullPath: '/courses/add'
-      preLoaderRoute: typeof ProtectedCoursesAddImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/settings': {
-      id: '/_protected/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof ProtectedSettingsImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/settings/_layout': {
-      id: '/_protected/settings/_layout'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof ProtectedSettingsLayoutImport
-      parentRoute: typeof ProtectedSettingsRoute
-    }
-    '/_protected/analytics/': {
-      id: '/_protected/analytics/'
-      path: '/analytics'
-      fullPath: '/analytics'
-      preLoaderRoute: typeof ProtectedAnalyticsIndexImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/courses/': {
-      id: '/_protected/courses/'
-      path: '/courses'
-      fullPath: '/courses'
-      preLoaderRoute: typeof ProtectedCoursesIndexImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/courses/edit/$slug': {
-      id: '/_protected/courses/edit/$slug'
-      path: '/courses/edit/$slug'
-      fullPath: '/courses/edit/$slug'
-      preLoaderRoute: typeof ProtectedCoursesEditSlugImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/settings/_layout/account': {
-      id: '/_protected/settings/_layout/account'
-      path: '/account'
-      fullPath: '/settings/account'
-      preLoaderRoute: typeof ProtectedSettingsLayoutAccountImport
-      parentRoute: typeof ProtectedSettingsLayoutImport
-    }
-    '/_protected/settings/_layout/appearance': {
-      id: '/_protected/settings/_layout/appearance'
-      path: '/appearance'
-      fullPath: '/settings/appearance'
-      preLoaderRoute: typeof ProtectedSettingsLayoutAppearanceImport
-      parentRoute: typeof ProtectedSettingsLayoutImport
-    }
-    '/_protected/settings/_layout/display': {
-      id: '/_protected/settings/_layout/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof ProtectedSettingsLayoutDisplayImport
-      parentRoute: typeof ProtectedSettingsLayoutImport
-    }
-    '/_protected/settings/_layout/notifications': {
-      id: '/_protected/settings/_layout/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof ProtectedSettingsLayoutNotificationsImport
-      parentRoute: typeof ProtectedSettingsLayoutImport
-    }
-    '/_protected/courses/edit/': {
-      id: '/_protected/courses/edit/'
-      path: '/courses/edit'
-      fullPath: '/courses/edit'
-      preLoaderRoute: typeof ProtectedCoursesEditIndexImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_protected/settings/_layout/': {
-      id: '/_protected/settings/_layout/'
-      path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof ProtectedSettingsLayoutIndexImport
-      parentRoute: typeof ProtectedSettingsLayoutImport
+    '/demo/tanstack-query': {
+      id: '/demo/tanstack-query'
+      path: '/demo/tanstack-query'
+      fullPath: '/demo/tanstack-query'
+      preLoaderRoute: typeof DemoTanstackQueryImport
+      parentRoute: typeof rootRoute
     }
   }
 }
 
 // Create and export the route tree
 
-interface AuthRouteChildren {
-  AuthConfirmPasswordRoute: typeof AuthConfirmPasswordRoute
-  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
-  AuthLoginRoute: typeof AuthLoginRoute
-  AuthRegisterRoute: typeof AuthRegisterRoute
-  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthConfirmPasswordRoute: AuthConfirmPasswordRoute,
-  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
-  AuthLoginRoute: AuthLoginRoute,
-  AuthRegisterRoute: AuthRegisterRoute,
-  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
-interface ProtectedSettingsLayoutRouteChildren {
-  ProtectedSettingsLayoutAccountRoute: typeof ProtectedSettingsLayoutAccountRoute
-  ProtectedSettingsLayoutAppearanceRoute: typeof ProtectedSettingsLayoutAppearanceRoute
-  ProtectedSettingsLayoutDisplayRoute: typeof ProtectedSettingsLayoutDisplayRoute
-  ProtectedSettingsLayoutNotificationsRoute: typeof ProtectedSettingsLayoutNotificationsRoute
-  ProtectedSettingsLayoutIndexRoute: typeof ProtectedSettingsLayoutIndexRoute
-}
-
-const ProtectedSettingsLayoutRouteChildren: ProtectedSettingsLayoutRouteChildren =
-  {
-    ProtectedSettingsLayoutAccountRoute: ProtectedSettingsLayoutAccountRoute,
-    ProtectedSettingsLayoutAppearanceRoute:
-      ProtectedSettingsLayoutAppearanceRoute,
-    ProtectedSettingsLayoutDisplayRoute: ProtectedSettingsLayoutDisplayRoute,
-    ProtectedSettingsLayoutNotificationsRoute:
-      ProtectedSettingsLayoutNotificationsRoute,
-    ProtectedSettingsLayoutIndexRoute: ProtectedSettingsLayoutIndexRoute,
-  }
-
-const ProtectedSettingsLayoutRouteWithChildren =
-  ProtectedSettingsLayoutRoute._addFileChildren(
-    ProtectedSettingsLayoutRouteChildren,
-  )
-
-interface ProtectedSettingsRouteChildren {
-  ProtectedSettingsLayoutRoute: typeof ProtectedSettingsLayoutRouteWithChildren
-}
-
-const ProtectedSettingsRouteChildren: ProtectedSettingsRouteChildren = {
-  ProtectedSettingsLayoutRoute: ProtectedSettingsLayoutRouteWithChildren,
-}
-
-const ProtectedSettingsRouteWithChildren =
-  ProtectedSettingsRoute._addFileChildren(ProtectedSettingsRouteChildren)
-
-interface ProtectedRouteChildren {
-  ProtectedCustomersRoute: typeof ProtectedCustomersRoute
-  ProtectedDashboardRoute: typeof ProtectedDashboardRoute
-  ProtectedMessagesRoute: typeof ProtectedMessagesRoute
-  ProtectedNotificationsRoute: typeof ProtectedNotificationsRoute
-  ProtectedAnalyticsSlugRoute: typeof ProtectedAnalyticsSlugRoute
-  ProtectedCoursesSlugRoute: typeof ProtectedCoursesSlugRoute
-  ProtectedCoursesAddRoute: typeof ProtectedCoursesAddRoute
-  ProtectedSettingsRoute: typeof ProtectedSettingsRouteWithChildren
-  ProtectedAnalyticsIndexRoute: typeof ProtectedAnalyticsIndexRoute
-  ProtectedCoursesIndexRoute: typeof ProtectedCoursesIndexRoute
-  ProtectedCoursesEditSlugRoute: typeof ProtectedCoursesEditSlugRoute
-  ProtectedCoursesEditIndexRoute: typeof ProtectedCoursesEditIndexRoute
-}
-
-const ProtectedRouteChildren: ProtectedRouteChildren = {
-  ProtectedCustomersRoute: ProtectedCustomersRoute,
-  ProtectedDashboardRoute: ProtectedDashboardRoute,
-  ProtectedMessagesRoute: ProtectedMessagesRoute,
-  ProtectedNotificationsRoute: ProtectedNotificationsRoute,
-  ProtectedAnalyticsSlugRoute: ProtectedAnalyticsSlugRoute,
-  ProtectedCoursesSlugRoute: ProtectedCoursesSlugRoute,
-  ProtectedCoursesAddRoute: ProtectedCoursesAddRoute,
-  ProtectedSettingsRoute: ProtectedSettingsRouteWithChildren,
-  ProtectedAnalyticsIndexRoute: ProtectedAnalyticsIndexRoute,
-  ProtectedCoursesIndexRoute: ProtectedCoursesIndexRoute,
-  ProtectedCoursesEditSlugRoute: ProtectedCoursesEditSlugRoute,
-  ProtectedCoursesEditIndexRoute: ProtectedCoursesEditIndexRoute,
-}
-
-const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
-  ProtectedRouteChildren,
-)
-
-interface UnprotectedRouteChildren {
-  UnprotectedPrivacyPolicyRoute: typeof UnprotectedPrivacyPolicyRoute
-  UnprotectedTermsAndConditionRoute: typeof UnprotectedTermsAndConditionRoute
-  UnprotectedIndexRoute: typeof UnprotectedIndexRoute
-}
-
-const UnprotectedRouteChildren: UnprotectedRouteChildren = {
-  UnprotectedPrivacyPolicyRoute: UnprotectedPrivacyPolicyRoute,
-  UnprotectedTermsAndConditionRoute: UnprotectedTermsAndConditionRoute,
-  UnprotectedIndexRoute: UnprotectedIndexRoute,
-}
-
-const UnprotectedRouteWithChildren = UnprotectedRoute._addFileChildren(
-  UnprotectedRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
-  '': typeof UnprotectedRouteWithChildren
-  '/confirm-password': typeof AuthConfirmPasswordRoute
-  '/forgot-password': typeof AuthForgotPasswordRoute
-  '/login': typeof AuthLoginRoute
-  '/register': typeof AuthRegisterRoute
-  '/verify-email': typeof AuthVerifyEmailRoute
-  '/customers': typeof ProtectedCustomersRoute
-  '/dashboard': typeof ProtectedDashboardRoute
-  '/messages': typeof ProtectedMessagesRoute
-  '/notifications': typeof ProtectedNotificationsRoute
-  '/privacy-policy': typeof UnprotectedPrivacyPolicyRoute
-  '/terms-and-condition': typeof UnprotectedTermsAndConditionRoute
-  '/': typeof UnprotectedIndexRoute
-  '/analytics/$slug': typeof ProtectedAnalyticsSlugRoute
-  '/courses/$slug': typeof ProtectedCoursesSlugRoute
-  '/courses/add': typeof ProtectedCoursesAddRoute
-  '/settings': typeof ProtectedSettingsLayoutRouteWithChildren
-  '/analytics': typeof ProtectedAnalyticsIndexRoute
-  '/courses': typeof ProtectedCoursesIndexRoute
-  '/courses/edit/$slug': typeof ProtectedCoursesEditSlugRoute
-  '/settings/account': typeof ProtectedSettingsLayoutAccountRoute
-  '/settings/appearance': typeof ProtectedSettingsLayoutAppearanceRoute
-  '/settings/display': typeof ProtectedSettingsLayoutDisplayRoute
-  '/settings/notifications': typeof ProtectedSettingsLayoutNotificationsRoute
-  '/courses/edit': typeof ProtectedCoursesEditIndexRoute
-  '/settings/': typeof ProtectedSettingsLayoutIndexRoute
+  '/': typeof IndexRoute
+  '/demo/store': typeof DemoStoreRoute
+  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
 
 export interface FileRoutesByTo {
-  '': typeof ProtectedRouteWithChildren
-  '/confirm-password': typeof AuthConfirmPasswordRoute
-  '/forgot-password': typeof AuthForgotPasswordRoute
-  '/login': typeof AuthLoginRoute
-  '/register': typeof AuthRegisterRoute
-  '/verify-email': typeof AuthVerifyEmailRoute
-  '/customers': typeof ProtectedCustomersRoute
-  '/dashboard': typeof ProtectedDashboardRoute
-  '/messages': typeof ProtectedMessagesRoute
-  '/notifications': typeof ProtectedNotificationsRoute
-  '/privacy-policy': typeof UnprotectedPrivacyPolicyRoute
-  '/terms-and-condition': typeof UnprotectedTermsAndConditionRoute
-  '/': typeof UnprotectedIndexRoute
-  '/analytics/$slug': typeof ProtectedAnalyticsSlugRoute
-  '/courses/$slug': typeof ProtectedCoursesSlugRoute
-  '/courses/add': typeof ProtectedCoursesAddRoute
-  '/settings': typeof ProtectedSettingsLayoutIndexRoute
-  '/analytics': typeof ProtectedAnalyticsIndexRoute
-  '/courses': typeof ProtectedCoursesIndexRoute
-  '/courses/edit/$slug': typeof ProtectedCoursesEditSlugRoute
-  '/settings/account': typeof ProtectedSettingsLayoutAccountRoute
-  '/settings/appearance': typeof ProtectedSettingsLayoutAppearanceRoute
-  '/settings/display': typeof ProtectedSettingsLayoutDisplayRoute
-  '/settings/notifications': typeof ProtectedSettingsLayoutNotificationsRoute
-  '/courses/edit': typeof ProtectedCoursesEditIndexRoute
+  '/': typeof IndexRoute
+  '/demo/store': typeof DemoStoreRoute
+  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/_protected': typeof ProtectedRouteWithChildren
-  '/_unprotected': typeof UnprotectedRouteWithChildren
-  '/_auth/confirm-password': typeof AuthConfirmPasswordRoute
-  '/_auth/forgot-password': typeof AuthForgotPasswordRoute
-  '/_auth/login': typeof AuthLoginRoute
-  '/_auth/register': typeof AuthRegisterRoute
-  '/_auth/verify-email': typeof AuthVerifyEmailRoute
-  '/_protected/customers': typeof ProtectedCustomersRoute
-  '/_protected/dashboard': typeof ProtectedDashboardRoute
-  '/_protected/messages': typeof ProtectedMessagesRoute
-  '/_protected/notifications': typeof ProtectedNotificationsRoute
-  '/_unprotected/privacy-policy': typeof UnprotectedPrivacyPolicyRoute
-  '/_unprotected/terms-and-condition': typeof UnprotectedTermsAndConditionRoute
-  '/_unprotected/': typeof UnprotectedIndexRoute
-  '/_protected/analytics/$slug': typeof ProtectedAnalyticsSlugRoute
-  '/_protected/courses/$slug': typeof ProtectedCoursesSlugRoute
-  '/_protected/courses/add': typeof ProtectedCoursesAddRoute
-  '/_protected/settings': typeof ProtectedSettingsRouteWithChildren
-  '/_protected/settings/_layout': typeof ProtectedSettingsLayoutRouteWithChildren
-  '/_protected/analytics/': typeof ProtectedAnalyticsIndexRoute
-  '/_protected/courses/': typeof ProtectedCoursesIndexRoute
-  '/_protected/courses/edit/$slug': typeof ProtectedCoursesEditSlugRoute
-  '/_protected/settings/_layout/account': typeof ProtectedSettingsLayoutAccountRoute
-  '/_protected/settings/_layout/appearance': typeof ProtectedSettingsLayoutAppearanceRoute
-  '/_protected/settings/_layout/display': typeof ProtectedSettingsLayoutDisplayRoute
-  '/_protected/settings/_layout/notifications': typeof ProtectedSettingsLayoutNotificationsRoute
-  '/_protected/courses/edit/': typeof ProtectedCoursesEditIndexRoute
-  '/_protected/settings/_layout/': typeof ProtectedSettingsLayoutIndexRoute
+  '/': typeof IndexRoute
+  '/demo/store': typeof DemoStoreRoute
+  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/confirm-password'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/verify-email'
-    | '/customers'
-    | '/dashboard'
-    | '/messages'
-    | '/notifications'
-    | '/privacy-policy'
-    | '/terms-and-condition'
-    | '/'
-    | '/analytics/$slug'
-    | '/courses/$slug'
-    | '/courses/add'
-    | '/settings'
-    | '/analytics'
-    | '/courses'
-    | '/courses/edit/$slug'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/courses/edit'
-    | '/settings/'
+  fullPaths: '/' | '/demo/store' | '/demo/tanstack-query'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | ''
-    | '/confirm-password'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/verify-email'
-    | '/customers'
-    | '/dashboard'
-    | '/messages'
-    | '/notifications'
-    | '/privacy-policy'
-    | '/terms-and-condition'
-    | '/'
-    | '/analytics/$slug'
-    | '/courses/$slug'
-    | '/courses/add'
-    | '/settings'
-    | '/analytics'
-    | '/courses'
-    | '/courses/edit/$slug'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/courses/edit'
-  id:
-    | '__root__'
-    | '/_auth'
-    | '/_protected'
-    | '/_unprotected'
-    | '/_auth/confirm-password'
-    | '/_auth/forgot-password'
-    | '/_auth/login'
-    | '/_auth/register'
-    | '/_auth/verify-email'
-    | '/_protected/customers'
-    | '/_protected/dashboard'
-    | '/_protected/messages'
-    | '/_protected/notifications'
-    | '/_unprotected/privacy-policy'
-    | '/_unprotected/terms-and-condition'
-    | '/_unprotected/'
-    | '/_protected/analytics/$slug'
-    | '/_protected/courses/$slug'
-    | '/_protected/courses/add'
-    | '/_protected/settings'
-    | '/_protected/settings/_layout'
-    | '/_protected/analytics/'
-    | '/_protected/courses/'
-    | '/_protected/courses/edit/$slug'
-    | '/_protected/settings/_layout/account'
-    | '/_protected/settings/_layout/appearance'
-    | '/_protected/settings/_layout/display'
-    | '/_protected/settings/_layout/notifications'
-    | '/_protected/courses/edit/'
-    | '/_protected/settings/_layout/'
+  to: '/' | '/demo/store' | '/demo/tanstack-query'
+  id: '__root__' | '/' | '/demo/store' | '/demo/tanstack-query'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AuthRoute: typeof AuthRouteWithChildren
-  ProtectedRoute: typeof ProtectedRouteWithChildren
-  UnprotectedRoute: typeof UnprotectedRouteWithChildren
+  IndexRoute: typeof IndexRoute
+  DemoStoreRoute: typeof DemoStoreRoute
+  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AuthRoute: AuthRouteWithChildren,
-  ProtectedRoute: ProtectedRouteWithChildren,
-  UnprotectedRoute: UnprotectedRouteWithChildren,
+  IndexRoute: IndexRoute,
+  DemoStoreRoute: DemoStoreRoute,
+  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
 
 export const routeTree = rootRoute
@@ -741,159 +115,19 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_auth",
-        "/_protected",
-        "/_unprotected"
+        "/",
+        "/demo/store",
+        "/demo/tanstack-query"
       ]
     },
-    "/_auth": {
-      "filePath": "_auth.tsx",
-      "children": [
-        "/_auth/confirm-password",
-        "/_auth/forgot-password",
-        "/_auth/login",
-        "/_auth/register",
-        "/_auth/verify-email"
-      ]
+    "/": {
+      "filePath": "index.tsx"
     },
-    "/_protected": {
-      "filePath": "_protected.tsx",
-      "children": [
-        "/_protected/customers",
-        "/_protected/dashboard",
-        "/_protected/messages",
-        "/_protected/notifications",
-        "/_protected/analytics/$slug",
-        "/_protected/courses/$slug",
-        "/_protected/courses/add",
-        "/_protected/settings",
-        "/_protected/analytics/",
-        "/_protected/courses/",
-        "/_protected/courses/edit/$slug",
-        "/_protected/courses/edit/"
-      ]
+    "/demo/store": {
+      "filePath": "demo.store.tsx"
     },
-    "/_unprotected": {
-      "filePath": "_unprotected.tsx",
-      "children": [
-        "/_unprotected/privacy-policy",
-        "/_unprotected/terms-and-condition",
-        "/_unprotected/"
-      ]
-    },
-    "/_auth/confirm-password": {
-      "filePath": "_auth/confirm-password.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/forgot-password": {
-      "filePath": "_auth/forgot-password.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/login": {
-      "filePath": "_auth/login.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/register": {
-      "filePath": "_auth/register.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/verify-email": {
-      "filePath": "_auth/verify-email.tsx",
-      "parent": "/_auth"
-    },
-    "/_protected/customers": {
-      "filePath": "_protected/customers.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/dashboard": {
-      "filePath": "_protected/dashboard.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/messages": {
-      "filePath": "_protected/messages.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/notifications": {
-      "filePath": "_protected/notifications.tsx",
-      "parent": "/_protected"
-    },
-    "/_unprotected/privacy-policy": {
-      "filePath": "_unprotected/privacy-policy.tsx",
-      "parent": "/_unprotected"
-    },
-    "/_unprotected/terms-and-condition": {
-      "filePath": "_unprotected/terms-and-condition.tsx",
-      "parent": "/_unprotected"
-    },
-    "/_unprotected/": {
-      "filePath": "_unprotected/index.tsx",
-      "parent": "/_unprotected"
-    },
-    "/_protected/analytics/$slug": {
-      "filePath": "_protected/analytics/$slug.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/courses/$slug": {
-      "filePath": "_protected/courses/$slug.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/courses/add": {
-      "filePath": "_protected/courses/add.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/settings": {
-      "filePath": "_protected/settings",
-      "parent": "/_protected",
-      "children": [
-        "/_protected/settings/_layout"
-      ]
-    },
-    "/_protected/settings/_layout": {
-      "filePath": "_protected/settings/_layout.tsx",
-      "parent": "/_protected/settings",
-      "children": [
-        "/_protected/settings/_layout/account",
-        "/_protected/settings/_layout/appearance",
-        "/_protected/settings/_layout/display",
-        "/_protected/settings/_layout/notifications",
-        "/_protected/settings/_layout/"
-      ]
-    },
-    "/_protected/analytics/": {
-      "filePath": "_protected/analytics/index.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/courses/": {
-      "filePath": "_protected/courses/index.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/courses/edit/$slug": {
-      "filePath": "_protected/courses/edit/$slug.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/settings/_layout/account": {
-      "filePath": "_protected/settings/_layout/account.tsx",
-      "parent": "/_protected/settings/_layout"
-    },
-    "/_protected/settings/_layout/appearance": {
-      "filePath": "_protected/settings/_layout/appearance.tsx",
-      "parent": "/_protected/settings/_layout"
-    },
-    "/_protected/settings/_layout/display": {
-      "filePath": "_protected/settings/_layout/display.tsx",
-      "parent": "/_protected/settings/_layout"
-    },
-    "/_protected/settings/_layout/notifications": {
-      "filePath": "_protected/settings/_layout/notifications.tsx",
-      "parent": "/_protected/settings/_layout"
-    },
-    "/_protected/courses/edit/": {
-      "filePath": "_protected/courses/edit/index.tsx",
-      "parent": "/_protected"
-    },
-    "/_protected/settings/_layout/": {
-      "filePath": "_protected/settings/_layout/index.tsx",
-      "parent": "/_protected/settings/_layout"
+    "/demo/tanstack-query": {
+      "filePath": "demo.tanstack-query.tsx"
     }
   }
 }

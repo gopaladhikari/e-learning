@@ -1,34 +1,23 @@
-import { ThemeProvider } from "@/context/ThemeContext";
-import {
-  createRootRouteWithContext,
-  Outlet,
-} from "@tanstack/react-router";
-import { type AuthContextType } from "@/context/AuthContext";
-import { Footer } from "@/components/partials/Footer";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { Toaster } from "@/components/ui/toaster";
-import { Header } from "@/components/partials/Header";
+import { createRootRoute, Outlet } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
-export const Route = createRootRouteWithContext<AuthContextType>()({
-  component: Root,
-});
+import Header from '../components/Header'
 
-function Root() {
-  return (
+import TanstackQueryLayout from '../integrations/tanstack-query/layout'
+
+import TanstackQueryProvider from '../integrations/tanstack-query/provider'
+
+export const Route = createRootRoute({
+  component: () => (
     <>
-      <ThemeProvider>
+      <TanstackQueryProvider>
         <Header />
-        <main>
-          <Outlet />
-        </main>
-        <Toaster />
-        <Footer />
-      </ThemeProvider>
-      {import.meta.env.DEV && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
-      {import.meta.env.DEV && <TanStackRouterDevtools />}
+
+        <Outlet />
+        <TanStackRouterDevtools />
+
+        <TanstackQueryLayout />
+      </TanstackQueryProvider>
     </>
-  );
-}
+  ),
+})

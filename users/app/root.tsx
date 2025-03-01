@@ -1,84 +1,75 @@
 import {
+  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  data as res,
 } from "react-router";
-import "./tailwind.css";
-import { Header } from "./components/partials/Header";
-import { Footer } from "./components/partials/Footer";
-import {
-  commitSession,
-  destroySession,
-  getSession,
-} from "./lib/utils";
-import { axiosInstance } from "./config/axios";
-import { CartProvider } from "./context/cartContext";
-import { getCartItems, getMe } from "./lib/user";
+
 import type { Route } from "./+types/root";
+import "./app.css";
 
-export const loader = async ({ request }: Route.LoaderArgs) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const token = session.get("acessToken");
+export const links: Route.LinksFunction = () => [
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+  },
+];
 
-  try {
-    if (!token) throw new Error("Session expired");
-
-    axiosInstance.defaults.headers.common["Authorization"] =
-      `Bearer ${token}`;
-    const [user, cart] = await Promise.all([getMe(), getCartItems()]);
-
-    if (!user) throw new Error("User not found");
-
-    session.set("user", user.data);
-
-    return res(
-      {
-        user: user?.data,
-        cart: cart?.data,
-      },
-      {
-        headers: {
-          "Set-Cookie": await commitSession(session),
-        },
-      },
-    );
-  } catch (error) {
-    return res(null, {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-      status: 404,
-    });
-  }
-};
-
-export default function App({ loaderData }: Route.ComponentProps) {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body suppressHydrationWarning>
-        <CartProvider initalCart={loaderData?.cart || null}>
-          <Header user={loaderData?.user || null} />
-
-          <main>
-            <Outlet />
-          </main>
-          <Footer />
-        </CartProvider>
+      <body>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  return <Outlet />;
+}
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  let message = "Oops!";
+  let details = "An unexpected error occurred.";
+  let stack: string | undefined;
+
+  if (isRouteErrorResponse(error)) {
+    message = error.status === 404 ? "404" : "Error";
+    details =
+      error.status === 404
+        ? "The requested page could not be found."
+        : error.statusText || details;
+  } else if (import.meta.env.DEV && error && error instanceof Error) {
+    details = error.message;
+    stack = error.stack;
+  }
+
+  return (
+    <main className="pt-16 p-4 container mx-auto">
+      <h1>{message}</h1>
+      <p>{details}</p>
+      {stack && (
+        <pre className="w-full p-4 overflow-x-auto">
+          <code>{stack}</code>
+        </pre>
+      )}
+    </main>
   );
 }
